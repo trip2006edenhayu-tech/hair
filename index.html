@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エクステ診断 完全版</title>
+<style>
+body{font-family:sans-serif;background:#faf7f2;max-width:900px;margin:auto;padding:20px;line-height:1.8}
+.box{background:#fff;padding:20px;border-radius:15px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+button{width:100%;padding:14px;margin:8px 0;border:none;border-radius:10px;background:#d4af37;color:#fff;font-size:16px;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin:15px 0}
+th,td{border:1px solid #ddd;padding:8px;text-align:center}
+.red{color:red;font-weight:bold}
+.banner{background:#fff0f0;border:3px solid red;color:red;font-size:28px;font-weight:bold;padding:15px;border-radius:15px;text-align:center}
+.linkbtn{display:block;text-decoration:none;background:#d4af37;color:white;padding:12px;border-radius:10px;margin:8px 0;text-align:center}
+</style>
+</head>
+<body>
+<div class="box" id="app"></div>
+
+<script>
+function nav(back){
+return `<button onclick="${back}">← 戻る</button><button onclick="home()">🔄 最初から診断する</button>`;
+}
+
+function links(){
+return `
+<h2>📸 ビフォーアフターが気になる方はこちら</h2>
+<a class="linkbtn" target="_blank" href="https://www.instagram.com/eden_maed?igsh=b3lsNTlvb3Jvb3cx&utm_source=qr">施術事例を見る（天神店Instagram）</a>
+<a class="linkbtn" target="_blank" href="https://www.instagram.com/eden.fukuoka?igsh=MWd6djViN3Bnc3B2Yw==">施術事例を見る（博多店Instagram）</a>
+
+<h2>📅 ご予約はこちら</h2>
+<a class="linkbtn" target="_blank" href="https://beauty.hotpepper.jp/slnH000357549/coupon/">エデンメイド天神店</a>
+<a class="linkbtn" target="_blank" href="https://beauty.hotpepper.jp/slnH000381028/coupon/">エデン福岡博多店</a>`;
+}
+
+function home(){
+document.getElementById('app').innerHTML=`
+<h1>✨あなたに合うエクステ診断✨</h1>
+<h3>Q1. エクステをどのように楽しみたいですか？</h3>
+<button onclick="wing()">1年を通して長く楽しみたい</button>
+<button onclick="seal()">イベントやイメチェンで一度楽しみたい</button>`;
+}
+
+function seal(){
+document.getElementById('app').innerHTML=`
+<h2>Q2. シールエクステ選びで一番重視するものは？</h2>
+<button onclick="royal()">価格重視</button>
+<button onclick="premium()">価格と毛質のバランス重視</button>
+<button onclick="virgin()">毛質重視</button>
+${nav('home()')}`;
+}
+
+function wing(){
+document.getElementById('app').innerHTML=`
+<div class="banner">🎉 最大17万3千円お得！</div>
+<h2>💎【無加工毛エクステ】ダブル羽エクステ</h2>
+<p>無加工毛使用・うねり広がりほぼ無し・乾きやすい・巻きやすい・取れにくい・リペア可能・装着したままカラー可能</p>
+
+<h3>💇‍♀️地毛の長さ別おすすめ束数</h3>
+<ul>
+<li>地毛がボブの方：80〜100束</li>
+<li>地毛がミディアムの方：60〜80束</li>
+<li>地毛がセミロングの方：40〜60束</li>
+</ul>
+
+<h3>装着料金比較</h3>
+<table>
+<tr><th>束数</th><th>当店</th><th>他店平均</th><th>お得額</th></tr>
+<tr><td>60束</td><td>¥39,000</td><td>¥52,800</td><td class="red">1万3,800円お得！</td></tr>
+<tr><td>80束</td><td>¥52,000</td><td>¥70,400</td><td class="red">1万8,400円お得！</td></tr>
+<tr><td>100束</td><td>¥65,000</td><td>¥88,000</td><td class="red">2万3千円お得！</td></tr>
+</table>
+
+<h3>リペア料金比較</h3>
+<table>
+<tr><th>束数</th><th>当店</th><th>他店平均</th><th>お得額</th></tr>
+<tr><td>60束</td><td>¥11,400</td><td>¥26,400</td><td class="red">1万5千円お得！</td></tr>
+<tr><td>80束</td><td>¥15,200</td><td>¥35,200</td><td class="red">2万円お得！</td></tr>
+<tr><td>100束</td><td>¥19,000</td><td>¥44,000</td><td class="red">2万5千円お得！</td></tr>
+</table>
+
+<h3>2ヶ月に1回リペアした場合の年間比較</h3>
+<table>
+<tr><th>束数</th><th>年間お得額</th></tr>
+<tr><td>60束</td><td class="red">10万3,800円お得！</td></tr>
+<tr><td>80束</td><td class="red">13万8,400円お得！</td></tr>
+<tr><td>100束</td><td class="red">17万3千円お得！</td></tr>
+</table>
+
+${links()}
+${nav('home()')}`;
+}
+
+function royal(){
+document.getElementById('app').innerHTML=`
+<h2>💰ロイヤルレミー</h2>
+<p>1本¥270 / 平均予算¥22,000</p>
+<p>コスパ重視・うねり広がりあり・日々のアイロンや巻きをする方向け・カラー可能</p>
+<h3>💇‍♀️地毛の長さ別おすすめ本数</h3>
+<ul><li>ボブ：80〜100本</li><li>ミディアム：60〜80本</li><li>セミロング：40〜60本</li></ul>
+<table><tr><th>本数</th><th>料金</th></tr>
+<tr><td>60本</td><td>¥16,200</td></tr>
+<tr><td>80本</td><td>¥21,600</td></tr>
+<tr><td>100本</td><td>¥27,000</td></tr></table>
+${links()}${nav('seal()')}`;
+}
+
+function premium(){
+document.getElementById('app').innerHTML=`
+<h2>👑プレミアムレミー</h2>
+<p>1本¥370 / 平均予算¥30,000</p>
+<p>日本人の髪質に馴染みやすい・ロイヤルよりうねり広がり軽減・カラー可能</p>
+<h3>💇‍♀️地毛の長さ別おすすめ本数</h3>
+<ul><li>ボブ：80〜100本</li><li>ミディアム：60〜80本</li><li>セミロング：40〜60本</li></ul>
+<table><tr><th>本数</th><th>料金</th></tr>
+<tr><td>60本</td><td>¥22,200</td></tr>
+<tr><td>80本</td><td>¥29,600</td></tr>
+<tr><td>100本</td><td>¥37,000</td></tr></table>
+${links()}${nav('seal()')}`;
+}
+
+function virgin(){
+document.getElementById('app').innerHTML=`
+<h2>⭐バージンレミー</h2>
+<p>1本¥460 / 平均予算¥36,800</p>
+<p>うねり広がりほぼ無し・日々のお手入れがかなり楽・カラー可能</p>
+<h3>💇‍♀️地毛の長さ別おすすめ本数</h3>
+<ul><li>ボブ：80〜100本</li><li>ミディアム：60〜80本</li><li>セミロング：40〜60本</li></ul>
+<table><tr><th>本数</th><th>料金</th></tr>
+<tr><td>60本</td><td>¥27,600</td></tr>
+<tr><td>80本</td><td>¥36,800</td></tr>
+<tr><td>100本</td><td>¥46,000</td></tr></table>
+${links()}${nav('seal()')}`;
+}
+
+home();
+</script>
+</body>
+</html>
