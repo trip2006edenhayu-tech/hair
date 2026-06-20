@@ -3,138 +3,584 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>エクステ診断 完全版</title>
+<title>エクステ診断</title>
+
 <style>
-body{font-family:sans-serif;background:#faf7f2;max-width:900px;margin:auto;padding:20px;line-height:1.8}
-.box{background:#fff;padding:20px;border-radius:15px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-button{width:100%;padding:14px;margin:8px 0;border:none;border-radius:10px;background:#d4af37;color:#fff;font-size:16px;cursor:pointer}
-table{width:100%;border-collapse:collapse;margin:15px 0}
-th,td{border:1px solid #ddd;padding:8px;text-align:center}
-.red{color:red;font-weight:bold}
-.banner{background:#fff0f0;border:3px solid red;color:red;font-size:28px;font-weight:bold;padding:15px;border-radius:15px;text-align:center}
-.linkbtn{display:block;text-decoration:none;background:#d4af37;color:white;padding:12px;border-radius:10px;margin:8px 0;text-align:center}
+body{
+font-family:sans-serif;
+background:#f8f5ef;
+max-width:900px;
+margin:auto;
+padding:20px;
+line-height:1.8;
+}
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h1,h2,h3{
+text-align:center;
+}
+
+button{
+width:100%;
+padding:14px;
+margin:8px 0;
+border:none;
+border-radius:12px;
+background:#c9a227;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:14px;
+margin:8px 0;
+border-radius:12px;
+background:#c9a227;
+color:white;
+text-decoration:none;
+text-align:center;
+box-sizing:border-box;
+}
+
+.red{
+color:red;
+font-weight:bold;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin:15px 0;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+
+.banner{
+background:#fff0f0;
+border:3px solid red;
+color:red;
+font-size:28px;
+font-weight:bold;
+padding:15px;
+border-radius:15px;
+text-align:center;
+}
 </style>
 </head>
+
 <body>
-<div class="box" id="app"></div>
+
+<div class="card" id="app"></div>
 
 <script>
-function nav(back){
-return `<button onclick="${back}">← 戻る</button><button onclick="home()">🔄 最初から診断する</button>`;
-}
-
-function links(){
+  function nav(back){
 return `
-<h2>📸 ビフォーアフターが気になる方はこちら</h2>
-<a class="linkbtn" target="_blank" href="https://www.instagram.com/eden_maed?igsh=b3lsNTlvb3Jvb3cx&utm_source=qr">施術事例を見る（天神店Instagram）</a>
-<a class="linkbtn" target="_blank" href="https://www.instagram.com/eden.fukuoka?igsh=MWd6djViN3Bnc3B2Yw==">施術事例を見る（博多店Instagram）</a>
-
-<h2>📅 ご予約はこちら</h2>
-<a class="linkbtn" target="_blank" href="https://beauty.hotpepper.jp/slnH000357549/coupon/">エデンメイド天神店</a>
-<a class="linkbtn" target="_blank" href="https://beauty.hotpepper.jp/slnH000381028/coupon/">エデン福岡博多店</a>`;
+<button onclick="${back}">⬅ 戻る</button>
+<button onclick="home()">🏠 最初から診断する</button>
+`;
 }
+
+let hair="";
+let resultType="";
 
 function home(){
-document.getElementById('app').innerHTML=`
+document.getElementById("app").innerHTML=`
 <h1>✨あなたに合うエクステ診断✨</h1>
-<h3>Q1. エクステをどのように楽しみたいですか？</h3>
-<button onclick="wing()">1年を通して長く楽しみたい</button>
-<button onclick="seal()">イベントやイメチェンで一度楽しみたい</button>`;
+<p style="text-align:center;">診断時間 約30秒</p>
+
+<button onclick="wingStep2()">1年を通して長く楽しみたい</button>
+
+<button onclick="sealStep2()">イベントやイメチェンで楽しみたい</button>
+`;
 }
 
-function seal(){
-document.getElementById('app').innerHTML=`
-<h2>Q2. シールエクステ選びで一番重視するものは？</h2>
-<button onclick="royal()">価格重視</button>
-<button onclick="premium()">価格と毛質のバランス重視</button>
-<button onclick="virgin()">毛質重視</button>
-${nav('home()')}`;
+function wingStep2(){
+document.getElementById("app").innerHTML=`
+<h2>STEP2</h2>
+<h3>エクステで重視することは？</h3>
+
+<button onclick="hairStep('wing')">お手入れの楽さ</button>
+
+<button onclick="hairStep('wing')">毛質の良さ</button>
+
+<button onclick="hairStep('wing')">長持ちすること</button>
+
+${nav('home()')}
+`;
 }
 
-function wing(){
-document.getElementById('app').innerHTML=`
-<div class="banner">🎉 最大17万3千円お得！</div>
+function sealStep2(){
+document.getElementById("app").innerHTML=`
+<h2>STEP2</h2>
+<h3>普段アイロンやコテを使いますか？</h3>
+
+<button onclick="sealStep3()">毎日使う</button>
+
+<button onclick="sealStep3()">たまに使う</button>
+
+<button onclick="sealStep3()">ほとんど使わない</button>
+
+${nav('home()')}
+`;
+}
+
+function sealStep3(){
+document.getElementById("app").innerHTML=`
+<h2>STEP3</h2>
+<h3>エクステに求めるものは？</h3>
+
+<button onclick="hairStep('royal')">価格重視</button>
+
+<button onclick="hairStep('premium')">価格と毛質のバランス重視</button>
+
+<button onclick="hairStep('virgin')">毛質重視</button>
+
+${nav('sealStep2()')}
+`;
+}
+
+function hairStep(type){
+
+resultType=type;
+
+document.getElementById("app").innerHTML=`
+<h2>STEP4</h2>
+
+<h3>現在の髪の長さは？</h3>
+
+<button onclick="saveHair('ボブ')">ボブ</button>
+
+<button onclick="saveHair('ミディアム')">ミディアム</button>
+
+<button onclick="saveHair('セミロング')">セミロング</button>
+
+${nav(resultType==='wing' ? 'wingStep2()' : 'sealStep3()')}
+`;
+}
+
+function saveHair(v){
+
+hair=v;
+
+if(resultType==="wing"){
+wingResult();
+}
+else if(resultType==="royal"){
+royalResult();
+}
+else if(resultType==="premium"){
+premiumResult();
+}
+else{
+virginResult();
+}
+
+}
+
+function wingRecommend(){
+
+if(hair==="ボブ"){
+return "80〜100束";
+}
+
+if(hair==="ミディアム"){
+return "60〜80束";
+}
+
+return "40〜60束";
+
+}
+
+function sealRecommend(){
+
+if(hair==="ボブ"){
+return "80〜100本";
+}
+
+if(hair==="ミディアム"){
+return "60〜80本";
+}
+
+return "40〜60本";
+
+}
+  function wingResult(){
+
+document.getElementById("app").innerHTML=`
+
+<div class="banner">
+🎉 最大17万3千円お得！
+</div>
+
+<h2>🏆当店人気No.1</h2>
+
 <h2>💎【無加工毛エクステ】ダブル羽エクステ</h2>
-<p>無加工毛使用・うねり広がりほぼ無し・乾きやすい・巻きやすい・取れにくい・リペア可能・装着したままカラー可能</p>
 
-<h3>💇‍♀️地毛の長さ別おすすめ束数</h3>
+<p><b>57cm（おしり付近までの長さ）</b></p>
+
 <ul>
-<li>地毛がボブの方：80〜100束</li>
-<li>地毛がミディアムの方：60〜80束</li>
-<li>地毛がセミロングの方：40〜60束</li>
+<li>無加工毛使用</li>
+<li>うねり・広がりがほとんどない</li>
+<li>乾きやすい</li>
+<li>巻きが付きやすい</li>
+<li>取れにくい</li>
+<li>エクステの中で一番お手入れが簡単</li>
+<li>リペア可能</li>
+<li>装着したままカラー可能</li>
 </ul>
 
-<h3>装着料金比較</h3>
-<table>
-<tr><th>束数</th><th>当店</th><th>他店平均</th><th>お得額</th></tr>
-<tr><td>60束</td><td>¥39,000</td><td>¥52,800</td><td class="red">1万3,800円お得！</td></tr>
-<tr><td>80束</td><td>¥52,000</td><td>¥70,400</td><td class="red">1万8,400円お得！</td></tr>
-<tr><td>100束</td><td>¥65,000</td><td>¥88,000</td><td class="red">2万3千円お得！</td></tr>
-</table>
+<h3>おすすめ束数</h3>
 
-<h3>リペア料金比較</h3>
-<table>
-<tr><th>束数</th><th>当店</th><th>他店平均</th><th>お得額</th></tr>
-<tr><td>60束</td><td>¥11,400</td><td>¥26,400</td><td class="red">1万5千円お得！</td></tr>
-<tr><td>80束</td><td>¥15,200</td><td>¥35,200</td><td class="red">2万円お得！</td></tr>
-<tr><td>100束</td><td>¥19,000</td><td>¥44,000</td><td class="red">2万5千円お得！</td></tr>
-</table>
+<p>
+${hair}の方 →
+<b>${wingRecommend()}</b>
+</p>
 
-<h3>2ヶ月に1回リペアした場合の年間比較</h3>
-<table>
-<tr><th>束数</th><th>年間お得額</th></tr>
-<tr><td>60束</td><td class="red">10万3,800円お得！</td></tr>
-<tr><td>80束</td><td class="red">13万8,400円お得！</td></tr>
-<tr><td>100束</td><td class="red">17万3千円お得！</td></tr>
-</table>
+<button onclick="priceCompare()">
+💰料金比較を見る
+</button>
 
-${links()}
-${nav('home()')}`;
+<button onclick="instaPage()">
+料金比較は見ない
+</button>
+
+${nav('home()')}
+`;
+
 }
 
-function royal(){
-document.getElementById('app').innerHTML=`
+function priceCompare(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>💰装着料金比較</h2>
+
+<table>
+
+<tr>
+<th>束数</th>
+<th>当店</th>
+<th>他店平均</th>
+<th>お得額</th>
+</tr>
+
+<tr>
+<td>60束</td>
+<td>¥39,000</td>
+<td>¥52,800</td>
+<td class="red">1万3,800円お得！</td>
+</tr>
+
+<tr>
+<td>80束</td>
+<td>¥52,000</td>
+<td>¥70,400</td>
+<td class="red">1万8,400円お得！</td>
+</tr>
+
+<tr>
+<td>100束</td>
+<td>¥65,000</td>
+<td>¥88,000</td>
+<td class="red">2万3千円お得！</td>
+</tr>
+
+</table>
+
+<button onclick="repairCompare()">
+🔧リペア料金比較を見る
+</button>
+
+<button onclick="instaPage()">
+見ない
+</button>
+
+${nav('wingResult()')}
+`;
+
+}
+
+function repairCompare(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>🔧リペア料金比較</h2>
+
+<table>
+
+<tr>
+<th>束数</th>
+<th>当店</th>
+<th>他店平均</th>
+<th>お得額</th>
+</tr>
+
+<tr>
+<td>60束</td>
+<td>¥11,400</td>
+<td>¥26,400</td>
+<td class="red">1万5千円お得！</td>
+</tr>
+
+<tr>
+<td>80束</td>
+<td>¥15,200</td>
+<td>¥35,200</td>
+<td class="red">2万円お得！</td>
+</tr>
+
+<tr>
+<td>100束</td>
+<td>¥19,000</td>
+<td>¥44,000</td>
+<td class="red">2万5千円お得！</td>
+</tr>
+
+</table>
+
+<button onclick="yearCompare()">
+🎉年間のお得額を見る
+</button>
+
+<button onclick="instaPage()">
+見ない
+</button>
+
+${nav('priceCompare()')}
+`;
+
+}
+
+function yearCompare(){
+
+document.getElementById("app").innerHTML=`
+
+<div class="banner">
+🎉 最大17万3千円お得！
+</div>
+
+<h2>2ヶ月に1回リペアした場合</h2>
+
+<table>
+
+<tr>
+<th>束数</th>
+<th>年間お得額</th>
+</tr>
+
+<tr>
+<td>60束</td>
+<td class="red">10万3,800円お得！</td>
+</tr>
+
+<tr>
+<td>80束</td>
+<td class="red">13万8,400円お得！</td>
+</tr>
+
+<tr>
+<td>100束</td>
+<td class="red">17万3千円お得！</td>
+</tr>
+
+</table>
+
+<button onclick="instaPage()">
+次へ進む
+</button>
+
+${nav('repairCompare()')}
+`;
+
+}
+  function royalResult(){
+
+document.getElementById("app").innerHTML=`
+
 <h2>💰ロイヤルレミー</h2>
-<p>1本¥270 / 平均予算¥22,000</p>
-<p>コスパ重視・うねり広がりあり・日々のアイロンや巻きをする方向け・カラー可能</p>
-<h3>💇‍♀️地毛の長さ別おすすめ本数</h3>
-<ul><li>ボブ：80〜100本</li><li>ミディアム：60〜80本</li><li>セミロング：40〜60本</li></ul>
-<table><tr><th>本数</th><th>料金</th></tr>
+
+<p><b>52cm（おへそ付近までの長さ）</b></p>
+
+<ul>
+<li>1本 ¥270</li>
+<li>平均予算 ¥22,000</li>
+<li>コスパ重視</li>
+<li>日々のアイロンやコテをしっかりする方向け</li>
+<li>装着したままカラー可能</li>
+</ul>
+
+<h3>おすすめ本数</h3>
+
+<p>
+${hair}の方 →
+<b>${sealRecommend()}</b>
+</p>
+
+<table>
+<tr><th>本数</th><th>料金</th></tr>
 <tr><td>60本</td><td>¥16,200</td></tr>
 <tr><td>80本</td><td>¥21,600</td></tr>
-<tr><td>100本</td><td>¥27,000</td></tr></table>
-${links()}${nav('seal()')}`;
+<tr><td>100本</td><td>¥27,000</td></tr>
+</table>
+
+<button onclick="instaPage()">
+📸施術事例を見る
+</button>
+
+${nav('sealStep3()')}
+`;
+
 }
 
-function premium(){
-document.getElementById('app').innerHTML=`
+function premiumResult(){
+
+document.getElementById("app").innerHTML=`
+
 <h2>👑プレミアムレミー</h2>
-<p>1本¥370 / 平均予算¥30,000</p>
-<p>日本人の髪質に馴染みやすい・ロイヤルよりうねり広がり軽減・カラー可能</p>
-<h3>💇‍♀️地毛の長さ別おすすめ本数</h3>
-<ul><li>ボブ：80〜100本</li><li>ミディアム：60〜80本</li><li>セミロング：40〜60本</li></ul>
-<table><tr><th>本数</th><th>料金</th></tr>
+
+<p><b>52cm（おへそ付近までの長さ）</b></p>
+
+<ul>
+<li>1本 ¥370</li>
+<li>平均予算 ¥30,000</li>
+<li>価格と毛質のバランス重視</li>
+<li>日本人の髪質に馴染みやすい</li>
+<li>ロイヤルより広がりを軽減</li>
+<li>装着したままカラー可能</li>
+</ul>
+
+<h3>おすすめ本数</h3>
+
+<p>
+${hair}の方 →
+<b>${sealRecommend()}</b>
+</p>
+
+<table>
+<tr><th>本数</th><th>料金</th></tr>
 <tr><td>60本</td><td>¥22,200</td></tr>
 <tr><td>80本</td><td>¥29,600</td></tr>
-<tr><td>100本</td><td>¥37,000</td></tr></table>
-${links()}${nav('seal()')}`;
+<tr><td>100本</td><td>¥37,000</td></tr>
+</table>
+
+<button onclick="instaPage()">
+📸施術事例を見る
+</button>
+
+${nav('sealStep3()')}
+`;
+
 }
 
-function virgin(){
-document.getElementById('app').innerHTML=`
+function virginResult(){
+
+document.getElementById("app").innerHTML=`
+
 <h2>⭐バージンレミー</h2>
-<p>1本¥460 / 平均予算¥36,800</p>
-<p>うねり広がりほぼ無し・日々のお手入れがかなり楽・カラー可能</p>
-<h3>💇‍♀️地毛の長さ別おすすめ本数</h3>
-<ul><li>ボブ：80〜100本</li><li>ミディアム：60〜80本</li><li>セミロング：40〜60本</li></ul>
-<table><tr><th>本数</th><th>料金</th></tr>
+
+<p><b>52cm（おへそ付近までの長さ）</b></p>
+
+<ul>
+<li>1本 ¥460</li>
+<li>平均予算 ¥36,800</li>
+<li>うねり・広がりがほとんどない</li>
+<li>日々のお手入れがかなり楽</li>
+<li>装着したままカラー可能</li>
+</ul>
+
+<h3>おすすめ本数</h3>
+
+<p>
+${hair}の方 →
+<b>${sealRecommend()}</b>
+</p>
+
+<table>
+<tr><th>本数</th><th>料金</th></tr>
 <tr><td>60本</td><td>¥27,600</td></tr>
 <tr><td>80本</td><td>¥36,800</td></tr>
-<tr><td>100本</td><td>¥46,000</td></tr></table>
-${links()}${nav('seal()')}`;
+<tr><td>100本</td><td>¥46,000</td></tr>
+</table>
+
+<button onclick="instaPage()">
+📸施術事例を見る
+</button>
+
+${nav('sealStep3()')}
+`;
+
+}
+
+function instaPage(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>📸施術事例を見る</h2>
+
+<a class="btn"
+target="_blank"
+href="https://www.instagram.com/eden_maed?igsh=b3lsNTlvb3Jvb3cx&utm_source=qr">
+天神店Instagram
+</a>
+
+<a class="btn"
+target="_blank"
+href="https://www.instagram.com/eden.fukuoka?igsh=MWd6djViN3Bnc3B2Yw==">
+博多店Instagram
+</a>
+
+<button onclick="reservePage()">
+📅予約へ進む
+</button>
+
+<button onclick="reservePage()">
+Instagramは見ない
+</button>
+
+${nav('home()')}
+`;
+
+}
+
+function reservePage(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>📅ご予約はこちら</h2>
+
+<a class="btn"
+target="_blank"
+href="https://beauty.hotpepper.jp/slnH000357549/coupon/">
+エデンメイド天神店
+</a>
+
+<a class="btn"
+target="_blank"
+href="https://beauty.hotpepper.jp/slnH000381028/coupon/">
+エデン福岡博多店
+</a>
+
+${nav('home()')}
+`;
+
 }
 
 home();
+
 </script>
+
 </body>
 </html>
