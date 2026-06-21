@@ -314,139 +314,122 @@ ${nav('step4()')}
 `;
 
 }
-  function home(){
+  function resultWing(){
 
 document.getElementById("app").innerHTML=`
 
-<h1>✨あなたに合うエクステ診断✨</h1>
+<h2>🏆診断結果</h2>
 
-<p style="text-align:center;">
-5つの質問であなたに合うエクステを診断します♪
+<div class="rank1">
+
+<h3>🥇 あなたに一番おすすめ</h3>
+
+<h2>💎【無加工毛エクステ】ダブル羽エクステ</h2>
+
+<p>
+ストレートの日はアイロンがほぼ不要！<br>
+巻きやすく取れにくい！<br>
+リペア可能で長期的に一番お得！
 </p>
 
-<button onclick="step1()">
-診断スタート
+<button onclick="wingDetail()">
+詳細を見る
 </button>
 
+</div>
+
+<div class="rank2">
+
+<h3>🥈 二番目におすすめ</h3>
+
+<h2>⭐ バージンレミー</h2>
+
+<p>
+シール最高ランク！<br>
+うねり広がりが少なく扱いやすい！
+</p>
+
+<button onclick="virginDetail()">
+詳細を見る
+</button>
+
+</div>
+
+<div class="rank3">
+
+<h3>🥉 三番目におすすめ</h3>
+
+<h2>👑 プレミアムレミー</h2>
+
+<p>
+価格と毛質のバランス◎
+</p>
+
+<button onclick="premiumDetail()">
+詳細を見る
+</button>
+
+</div>
+
+${nav('step4()')}
 `;
 
 }
 
-function step1(){
+function resultSeal(){
 
 document.getElementById("app").innerHTML=`
 
-<h2>STEP1</h2>
+<h2>🏆診断結果</h2>
 
-<h3>エクステの経験はありますか？</h3>
+<div class="rank1">
 
-<button onclick="experience='毎回';step2()">
-💎 毎回エクステをつけている
+<h3>🥇 あなたに一番おすすめ</h3>
+
+<h2>⭐ バージンレミー</h2>
+
+<p>
+シール最高ランク！<br>
+うねり広がりが少なく扱いやすい！
+</p>
+
+<button onclick="virginDetail()">
+詳細を見る
 </button>
 
-<button onclick="experience='数回';step2()">
-✨ 年に数回つける
+</div>
+
+<div class="rank2">
+
+<h3>🥈 二番目におすすめ</h3>
+
+<h2>👑 プレミアムレミー</h2>
+
+<p>
+価格と毛質のバランス◎
+</p>
+
+<button onclick="premiumDetail()">
+詳細を見る
 </button>
 
-<button onclick="experience='初めて';step2()">
-🌱 全くつけたことがない
+</div>
+
+<div class="rank3">
+
+<h3>🥉 三番目におすすめ</h3>
+
+<h2>💰 ロイヤルレミー</h2>
+
+<p>
+コスパ重視の方向け！
+</p>
+
+<button onclick="royalDetail()">
+詳細を見る
 </button>
 
-${nav('home()')}
-`;
-
-}
-
-function step2(){
-
-document.getElementById("app").innerHTML=`
-
-<h2>STEP2</h2>
-
-<h3>エクステで一番重視することは？</h3>
-
-<button onclick="priority='楽さ';step3()">
-✨ お手入れの楽さ
-</button>
-
-<button onclick="priority='予算';step3()">
-💰 予算
-</button>
-
-<button onclick="priority='毛質';step3()">
-⭐ 毛質
-</button>
-
-${nav('step1()')}
-`;
-
-}
-
-function step3(){
-
-document.getElementById("app").innerHTML=`
-
-<h2>STEP3</h2>
-
-<h3>あなたが理想とするエクステに一番近いのは？</h3>
-
-<button onclick="style='羽';step4()">
-✨ ストレートの日はアイロンがほとんどいらず、巻く日は簡単に巻けて取れにくい方がいい
-</button>
-
-<button onclick="style='プレミアム';step4()">
-💰 予算を抑えながら楽しみたい
-</button>
-
-<button onclick="style='バージン';step4()">
-⭐ とにかく綺麗な毛質を重視したい
-</button>
-
-${nav('step2()')}
-`;
-
-}
-
-function step4(){
-
-document.getElementById("app").innerHTML=`
-
-<h2>STEP4</h2>
-
-<h3>エクステを楽しむならどちらが近いですか？</h3>
-
-<button onclick="enjoy='羽';resultWing()">
-✨ リペアして長く使いたい
-</button>
-
-<button onclick="enjoy='シール';resultSeal()">
-✨ 気分やイベントに合わせて付け替えたい
-</button>
-
-<button onclick="step5()">
-✨ まだどちらが良いかわからない
-</button>
-
-${nav('step3()')}
-`;
-
-}
-
-function step5(){
-
-document.getElementById("app").innerHTML=`
-
-<h2>STEP5</h2>
-
-<h3>どちらに魅力を感じますか？</h3>
-
-<button onclick="resultWing()">
-✨ お手入れの楽さ
-</button>
-
-<button onclick="resultSeal()">
-💰 初期費用の安さ
-</button>
+</div>
 
 ${nav('step4()')}
 `;
