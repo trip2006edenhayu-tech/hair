@@ -2,24 +2,26 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>エクステ診断</title>
 
 <style>
+
 body{
 font-family:sans-serif;
-background:#f8f5ef;
-max-width:900px;
-margin:auto;
+background:#f7f7f7;
+margin:0;
 padding:20px;
-line-height:1.8;
 }
 
-.card{
-background:#fff;
+.container{
+max-width:700px;
+margin:auto;
+background:white;
 padding:20px;
 border-radius:15px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+box-shadow:0 0 10px rgba(0,0,0,.1);
 }
 
 h1,h2,h3{
@@ -28,38 +30,35 @@ text-align:center;
 
 button{
 width:100%;
-padding:14px;
+padding:15px;
 margin:8px 0;
 border:none;
-border-radius:12px;
-background:#c9a227;
-color:#fff;
+border-radius:10px;
+background:#111;
+color:white;
 font-size:16px;
 cursor:pointer;
 }
 
-.btn{
-display:block;
-width:100%;
-padding:14px;
-margin:8px 0;
-border-radius:12px;
-background:#c9a227;
-color:white;
-text-decoration:none;
-text-align:center;
-box-sizing:border-box;
+button:hover{
+opacity:.9;
 }
 
-.red{
-color:red;
-font-weight:bold;
+.btn{
+display:block;
+text-align:center;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+background:#111;
+color:white;
+text-decoration:none;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin:15px 0;
+margin-top:15px;
 }
 
 th,td{
@@ -68,139 +67,85 @@ padding:10px;
 text-align:center;
 }
 
-.banner{
-background:#fff0f0;
-border:3px solid red;
-color:red;
-font-size:28px;
-font-weight:bold;
-padding:15px;
-border-radius:15px;
-text-align:center;
+th{
+background:#f0f0f0;
 }
+
+.red{
+color:red;
+font-weight:bold;
+}
+
+.blue{
+color:blue;
+font-weight:bold;
+}
+
+.rank1{
+background:#fff7d6;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.rank2{
+background:#f5f5f5;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.rank3{
+background:#f8efe8;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.back{
+background:#888;
+}
+
+.restart{
+background:#444;
+}
+
+ul{
+line-height:1.8;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="card" id="app"></div>
+<div class="container">
+
+<div id="app"></div>
+
+</div>
 
 <script>
-  function nav(back){
-return `
-<button onclick="${back}">⬅ 戻る</button>
-<button onclick="home()">🏠 最初から診断する</button>
-`;
-}
 
 let hair="";
-let resultType="";
+let experience="";
+let priority="";
+let style="";
+let enjoy="";
 
-function home(){
-document.getElementById("app").innerHTML=`
-<h1>✨あなたに合うエクステ診断✨</h1>
-<p style="text-align:center;">診断時間 約30秒</p>
+function nav(backFunc){
 
-<button onclick="wingStep2()">1年を通して長く楽しみたい</button>
+return `
+<br>
 
-<button onclick="sealStep2()">イベントやイメチェンで楽しみたい</button>
+<button class="back" onclick="${backFunc}">
+⬅ 戻る
+</button>
+
+<button class="restart" onclick="home()">
+🏠 最初から診断する
+</button>
 `;
-}
-
-function wingStep2(){
-document.getElementById("app").innerHTML=`
-<h2>STEP2</h2>
-<h3>エクステで重視することは？</h3>
-
-<button onclick="hairStep('wing')">お手入れの楽さ</button>
-
-<button onclick="hairStep('wing')">毛質の良さ</button>
-
-<button onclick="hairStep('wing')">長持ちすること</button>
-
-${nav('home()')}
-`;
-}
-
-function sealStep2(){
-document.getElementById("app").innerHTML=`
-<h2>STEP2</h2>
-<h3>普段アイロンやコテを使いますか？</h3>
-
-<button onclick="sealStep3()">毎日使う</button>
-
-<button onclick="sealStep3()">たまに使う</button>
-
-<button onclick="sealStep3()">ほとんど使わない</button>
-
-${nav('home()')}
-`;
-}
-
-function sealStep3(){
-document.getElementById("app").innerHTML=`
-<h2>STEP3</h2>
-<h3>エクステに求めるものは？</h3>
-
-<button onclick="hairStep('royal')">価格重視</button>
-
-<button onclick="hairStep('premium')">価格と毛質のバランス重視</button>
-
-<button onclick="hairStep('virgin')">毛質重視</button>
-
-${nav('sealStep2()')}
-`;
-}
-
-function hairStep(type){
-
-resultType=type;
-
-document.getElementById("app").innerHTML=`
-<h2>STEP4</h2>
-
-<h3>現在の髪の長さは？</h3>
-
-<button onclick="saveHair('ボブ')">ボブ</button>
-
-<button onclick="saveHair('ミディアム')">ミディアム</button>
-
-<button onclick="saveHair('セミロング')">セミロング</button>
-
-${nav(resultType==='wing' ? 'wingStep2()' : 'sealStep3()')}
-`;
-}
-
-function saveHair(v){
-
-hair=v;
-
-if(resultType==="wing"){
-wingResult();
-}
-else if(resultType==="royal"){
-royalResult();
-}
-else if(resultType==="premium"){
-premiumResult();
-}
-else{
-virginResult();
-}
-
-}
-
-function wingRecommend(){
-
-if(hair==="ボブ"){
-return "80〜100束";
-}
-
-if(hair==="ミディアム"){
-return "60〜80束";
-}
-
-return "40〜60束";
 
 }
 
@@ -217,13 +162,299 @@ return "60〜80本";
 return "40〜60本";
 
 }
-  function wingResult(){
+
+function wingRecommend(){
+
+if(hair==="ボブ"){
+return "80〜100束";
+}
+
+if(hair==="ミディアム"){
+return "60〜80束";
+}
+
+return "40〜60束";
+
+}
+  function home(){
 
 document.getElementById("app").innerHTML=`
 
-<div class="banner">
-🎉 最大17万3千円お得！
-</div>
+<h1>✨あなたに合うエクステ診断✨</h1>
+
+<p style="text-align:center;">
+5つの質問であなたに合うエクステを診断します♪
+</p>
+
+<button onclick="step1()">
+診断スタート
+</button>
+
+`;
+
+}
+
+function step1(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP1</h2>
+
+<h3>エクステの経験はありますか？</h3>
+
+<button onclick="experience='毎回';step2()">
+💎 毎回エクステをつけている
+</button>
+
+<button onclick="experience='数回';step2()">
+✨ 年に数回つける
+</button>
+
+<button onclick="experience='初めて';step2()">
+🌱 全くつけたことがない
+</button>
+
+${nav('home()')}
+`;
+
+}
+
+function step2(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP2</h2>
+
+<h3>エクステで一番重視することは？</h3>
+
+<button onclick="priority='楽さ';step3()">
+✨ お手入れの楽さ
+</button>
+
+<button onclick="priority='予算';step3()">
+💰 予算
+</button>
+
+<button onclick="priority='毛質';step3()">
+⭐ 毛質
+</button>
+
+${nav('step1()')}
+`;
+
+}
+
+function step3(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP3</h2>
+
+<h3>あなたが理想とするエクステに一番近いのは？</h3>
+
+<button onclick="style='羽';step4()">
+✨ ストレートの日はアイロンがほとんどいらず、巻く日は簡単に巻けて取れにくい方がいい
+</button>
+
+<button onclick="style='プレミアム';step4()">
+💰 予算を抑えながら楽しみたい
+</button>
+
+<button onclick="style='バージン';step4()">
+⭐ とにかく綺麗な毛質を重視したい
+</button>
+
+${nav('step2()')}
+`;
+
+}
+
+function step4(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP4</h2>
+
+<h3>エクステを楽しむならどちらが近いですか？</h3>
+
+<button onclick="enjoy='羽';resultWing()">
+✨ リペアして長く使いたい
+</button>
+
+<button onclick="enjoy='シール';resultSeal()">
+✨ 気分やイベントに合わせて付け替えたい
+</button>
+
+<button onclick="step5()">
+✨ まだどちらが良いかわからない
+</button>
+
+${nav('step3()')}
+`;
+
+}
+
+function step5(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP5</h2>
+
+<h3>どちらに魅力を感じますか？</h3>
+
+<button onclick="resultWing()">
+✨ お手入れの楽さ
+</button>
+
+<button onclick="resultSeal()">
+💰 初期費用の安さ
+</button>
+
+${nav('step4()')}
+`;
+
+}
+  function home(){
+
+document.getElementById("app").innerHTML=`
+
+<h1>✨あなたに合うエクステ診断✨</h1>
+
+<p style="text-align:center;">
+5つの質問であなたに合うエクステを診断します♪
+</p>
+
+<button onclick="step1()">
+診断スタート
+</button>
+
+`;
+
+}
+
+function step1(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP1</h2>
+
+<h3>エクステの経験はありますか？</h3>
+
+<button onclick="experience='毎回';step2()">
+💎 毎回エクステをつけている
+</button>
+
+<button onclick="experience='数回';step2()">
+✨ 年に数回つける
+</button>
+
+<button onclick="experience='初めて';step2()">
+🌱 全くつけたことがない
+</button>
+
+${nav('home()')}
+`;
+
+}
+
+function step2(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP2</h2>
+
+<h3>エクステで一番重視することは？</h3>
+
+<button onclick="priority='楽さ';step3()">
+✨ お手入れの楽さ
+</button>
+
+<button onclick="priority='予算';step3()">
+💰 予算
+</button>
+
+<button onclick="priority='毛質';step3()">
+⭐ 毛質
+</button>
+
+${nav('step1()')}
+`;
+
+}
+
+function step3(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP3</h2>
+
+<h3>あなたが理想とするエクステに一番近いのは？</h3>
+
+<button onclick="style='羽';step4()">
+✨ ストレートの日はアイロンがほとんどいらず、巻く日は簡単に巻けて取れにくい方がいい
+</button>
+
+<button onclick="style='プレミアム';step4()">
+💰 予算を抑えながら楽しみたい
+</button>
+
+<button onclick="style='バージン';step4()">
+⭐ とにかく綺麗な毛質を重視したい
+</button>
+
+${nav('step2()')}
+`;
+
+}
+
+function step4(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP4</h2>
+
+<h3>エクステを楽しむならどちらが近いですか？</h3>
+
+<button onclick="enjoy='羽';resultWing()">
+✨ リペアして長く使いたい
+</button>
+
+<button onclick="enjoy='シール';resultSeal()">
+✨ 気分やイベントに合わせて付け替えたい
+</button>
+
+<button onclick="step5()">
+✨ まだどちらが良いかわからない
+</button>
+
+${nav('step3()')}
+`;
+
+}
+
+function step5(){
+
+document.getElementById("app").innerHTML=`
+
+<h2>STEP5</h2>
+
+<h3>どちらに魅力を感じますか？</h3>
+
+<button onclick="resultWing()">
+✨ お手入れの楽さ
+</button>
+
+<button onclick="resultSeal()">
+💰 初期費用の安さ
+</button>
+
+${nav('step4()')}
+`;
+
+}
+  function wingDetail(){
+
+document.getElementById("app").innerHTML=`
 
 <h2>🏆当店人気No.1</h2>
 
@@ -233,48 +464,33 @@ document.getElementById("app").innerHTML=`
 
 <ul>
 <li>無加工毛使用</li>
-<li>うねり・広がりがほとんどない</li>
+<li>うねり広がりがほとんどない</li>
+<li>ストレートの日はアイロンほぼ不要</li>
+<li>巻きやすい</li>
+<li>巻きが取れにくい</li>
 <li>乾きやすい</li>
-<li>巻きが付きやすい</li>
-<li>取れにくい</li>
-<li>エクステの中で一番お手入れが簡単</li>
 <li>リペア可能</li>
 <li>装着したままカラー可能</li>
 </ul>
 
 <h3>おすすめ束数</h3>
 
-<p>
-${hair}の方 →
-<b>${wingRecommend()}</b>
-</p>
+<ul>
+<li>ボブ → 80〜100束</li>
+<li>ミディアム → 60〜80束</li>
+<li>セミロング → 40〜60束</li>
+</ul>
 
-<button onclick="priceCompare()">
-💰料金比較を見る
-</button>
-
-<button onclick="instaPage()">
-料金比較は見ない
-</button>
-
-${nav('home()')}
-`;
-
-}
-
-function priceCompare(){
-
-document.getElementById("app").innerHTML=`
-
-<h2>💰装着料金比較</h2>
+<h2>💎羽エクステ装着料金比較</h2>
 
 <table>
 
 <tr>
 <th>束数</th>
-<th>当店</th>
-<th>他店平均</th>
-<th>お得額</th>
+<th>【無加工毛エクステ】ダブル羽エクステ</th>
+<th>他店羽エクステ平均</th>
+<th>装着時お得額</th>
+<th>年間お得額</th>
 </tr>
 
 <tr>
@@ -282,6 +498,7 @@ document.getElementById("app").innerHTML=`
 <td>¥39,000</td>
 <td>¥52,800</td>
 <td class="red">1万3,800円お得！</td>
+<td class="blue">10万3,800円お得！</td>
 </tr>
 
 <tr>
@@ -289,6 +506,7 @@ document.getElementById("app").innerHTML=`
 <td>¥52,000</td>
 <td>¥70,400</td>
 <td class="red">1万8,400円お得！</td>
+<td class="blue">13万8,400円お得！</td>
 </tr>
 
 <tr>
@@ -296,36 +514,20 @@ document.getElementById("app").innerHTML=`
 <td>¥65,000</td>
 <td>¥88,000</td>
 <td class="red">2万3千円お得！</td>
+<td class="blue">17万3千円お得！</td>
 </tr>
 
 </table>
 
-<button onclick="repairCompare()">
-🔧リペア料金比較を見る
-</button>
-
-<button onclick="instaPage()">
-見ない
-</button>
-
-${nav('wingResult()')}
-`;
-
-}
-
-function repairCompare(){
-
-document.getElementById("app").innerHTML=`
-
-<h2>🔧リペア料金比較</h2>
+<h2>🔧羽エクステリペア料金比較</h2>
 
 <table>
 
 <tr>
 <th>束数</th>
 <th>当店</th>
-<th>他店平均</th>
-<th>お得額</th>
+<th>他店羽エクステ平均</th>
+<th>リペア時お得額</th>
 </tr>
 
 <tr>
@@ -351,62 +553,16 @@ document.getElementById("app").innerHTML=`
 
 </table>
 
-<button onclick="yearCompare()">
-🎉年間のお得額を見る
-</button>
-
 <button onclick="instaPage()">
-見ない
+📸施術事例を見る
 </button>
 
-${nav('priceCompare()')}
+${nav('resultWing()')}
 `;
 
 }
 
-function yearCompare(){
-
-document.getElementById("app").innerHTML=`
-
-<div class="banner">
-🎉 最大17万3千円お得！
-</div>
-
-<h2>2ヶ月に1回リペアした場合</h2>
-
-<table>
-
-<tr>
-<th>束数</th>
-<th>年間お得額</th>
-</tr>
-
-<tr>
-<td>60束</td>
-<td class="red">10万3,800円お得！</td>
-</tr>
-
-<tr>
-<td>80束</td>
-<td class="red">13万8,400円お得！</td>
-</tr>
-
-<tr>
-<td>100束</td>
-<td class="red">17万3千円お得！</td>
-</tr>
-
-</table>
-
-<button onclick="instaPage()">
-次へ進む
-</button>
-
-${nav('repairCompare()')}
-`;
-
-}
-  function royalResult(){
+function royalDetail(){
 
 document.getElementById("app").innerHTML=`
 
@@ -418,34 +574,28 @@ document.getElementById("app").innerHTML=`
 <li>1本 ¥270</li>
 <li>平均予算 ¥22,000</li>
 <li>コスパ重視</li>
-<li>日々のアイロンやコテをしっかりする方向け</li>
+<li>日々のアイロンや巻きをしっかりする方向け</li>
 <li>装着したままカラー可能</li>
 </ul>
 
 <h3>おすすめ本数</h3>
 
-<p>
-${hair}の方 →
-<b>${sealRecommend()}</b>
-</p>
-
-<table>
-<tr><th>本数</th><th>料金</th></tr>
-<tr><td>60本</td><td>¥16,200</td></tr>
-<tr><td>80本</td><td>¥21,600</td></tr>
-<tr><td>100本</td><td>¥27,000</td></tr>
-</table>
+<ul>
+<li>ボブ → 80〜100本</li>
+<li>ミディアム → 60〜80本</li>
+<li>セミロング → 40〜60本</li>
+</ul>
 
 <button onclick="instaPage()">
 📸施術事例を見る
 </button>
 
-${nav('sealStep3()')}
+${nav('resultSeal()')}
 `;
 
 }
 
-function premiumResult(){
+function premiumDetail(){
 
 document.getElementById("app").innerHTML=`
 
@@ -456,36 +606,30 @@ document.getElementById("app").innerHTML=`
 <ul>
 <li>1本 ¥370</li>
 <li>平均予算 ¥30,000</li>
-<li>価格と毛質のバランス重視</li>
+<li>価格と毛質のバランス◎</li>
 <li>日本人の髪質に馴染みやすい</li>
-<li>ロイヤルより広がりを軽減</li>
+<li>ロイヤルより広がりを抑えやすい</li>
 <li>装着したままカラー可能</li>
 </ul>
 
 <h3>おすすめ本数</h3>
 
-<p>
-${hair}の方 →
-<b>${sealRecommend()}</b>
-</p>
-
-<table>
-<tr><th>本数</th><th>料金</th></tr>
-<tr><td>60本</td><td>¥22,200</td></tr>
-<tr><td>80本</td><td>¥29,600</td></tr>
-<tr><td>100本</td><td>¥37,000</td></tr>
-</table>
+<ul>
+<li>ボブ → 80〜100本</li>
+<li>ミディアム → 60〜80本</li>
+<li>セミロング → 40〜60本</li>
+</ul>
 
 <button onclick="instaPage()">
 📸施術事例を見る
 </button>
 
-${nav('sealStep3()')}
+${nav('resultSeal()')}
 `;
 
 }
 
-function virginResult(){
+function virginDetail(){
 
 document.getElementById("app").innerHTML=`
 
@@ -496,30 +640,24 @@ document.getElementById("app").innerHTML=`
 <ul>
 <li>1本 ¥460</li>
 <li>平均予算 ¥36,800</li>
-<li>うねり・広がりがほとんどない</li>
+<li>うねり広がりがほとんどない</li>
 <li>日々のお手入れがかなり楽</li>
 <li>装着したままカラー可能</li>
 </ul>
 
 <h3>おすすめ本数</h3>
 
-<p>
-${hair}の方 →
-<b>${sealRecommend()}</b>
-</p>
-
-<table>
-<tr><th>本数</th><th>料金</th></tr>
-<tr><td>60本</td><td>¥27,600</td></tr>
-<tr><td>80本</td><td>¥36,800</td></tr>
-<tr><td>100本</td><td>¥46,000</td></tr>
-</table>
+<ul>
+<li>ボブ → 80〜100本</li>
+<li>ミディアム → 60〜80本</li>
+<li>セミロング → 40〜60本</li>
+</ul>
 
 <button onclick="instaPage()">
 📸施術事例を見る
 </button>
 
-${nav('sealStep3()')}
+${nav('resultSeal()')}
 `;
 
 }
@@ -544,10 +682,6 @@ href="https://www.instagram.com/eden.fukuoka?igsh=MWd6djViN3Bnc3B2Yw==">
 
 <button onclick="reservePage()">
 📅予約へ進む
-</button>
-
-<button onclick="reservePage()">
-Instagramは見ない
 </button>
 
 ${nav('home()')}
